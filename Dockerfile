@@ -10,7 +10,7 @@ RUN npm install --legacy-peer-deps
 COPY . .
 RUN npm run build
 
-# Expose Railway's dynamic port
-EXPOSE 4173
+# Use shell form of CMD so $PORT expands correctly
+EXPOSE 8080
 
-CMD ["npm", "run", "start"]
+CMD ["sh", "-c", "npx vite preview --host 0.0.0.0 --port ${PORT:-8080}"]
