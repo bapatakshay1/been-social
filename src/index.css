@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-zinc-50 text-zinc-900 antialiased selection:bg-amber-200 selection:text-zinc-900;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
