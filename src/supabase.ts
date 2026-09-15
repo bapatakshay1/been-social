@@ -1,8 +1,13 @@
 import { createClient } from '@supabase/supabase-js';
 
-// The URL should not include /rest/v1/
-const supabaseUrl = 'https://zpkxuczporzudiikajuo.supabase.co';
-// Using the anon public key
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpwa3h1Y3pwb3J6dWRpaWthanVvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzczMTIyMjgsImV4cCI6MjA5Mjg4ODIyOH0.qEYH_LN4KOc0ViKcv6UFL0FIAzoFmg-4sfO5_W_EM6U';
+// Config comes from the environment (Vite exposes VITE_* to the client).
+// Copy .env.example to .env and fill these in. The anon key is a publishable
+// client key; real access control is enforced by Supabase Row Level Security.
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
+const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
+
+if (!supabaseUrl || !supabaseKey) {
+  throw new Error('Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY. See .env.example.');
+}
 
 export const supabase = createClient(supabaseUrl, supabaseKey);
